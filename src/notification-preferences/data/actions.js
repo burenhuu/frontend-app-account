@@ -48,7 +48,7 @@ export const updatePreferenceValue = (groupName, preferenceName, notificationCha
   })
 );
 
-export const updateGroupValue = (courseId, groupName, value) => dispatch => (
+export const updateGroupToggle = (courseId, groupName, value) => dispatch => (
   dispatch({
     type: Actions.UPDATE_GROUP_PREFERENCE,
     courseId,

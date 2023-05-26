@@ -1,41 +1,57 @@
-export const notificationPreferencesStatus = () => state => (
+export const selectNotificationPreferencesStatus = () => state => (
   state.notificationPreferences.preferences.status
 );
 
-export const getPreferences = () => state => (
+export const selectPreferences = () => state => (
   state.notificationPreferences?.preferences?.preferences
 );
 
-export const courseListStatus = () => state => (
+export const selectCourseListStatus = () => state => (
   state.notificationPreferences.courses.status
 );
 
-export const getCourseList = () => state => (
+export const selectCourseList = () => state => (
   state.notificationPreferences.courses.courses
 );
 
-export const getCourse = courseId => state => (
-  getCourseList()(state).find(
+export const selectCourse = courseId => state => (
+  selectCourseList()(state).find(
     element => element.id === courseId,
   )
 );
 
-export const getPreferenceGroupIds = () => state => (
-  state.notificationPreferences.preferences.groups
+export const selectPreferenceGroupIds = () => state => (
+  state.notificationPreferences.preferences.groups.map(element => element.id)
 );
 
-export const getPreferenceGroup = group => state => (
-  getPreferences()(state).filter((preference) => (
-    preference.groupId === group
+export const selectPreferencesOfGroup = group => state => (
+  selectPreferences()(state).filter(element => (
+    element.groupId === group
   ))
 );
 
-export const getPreferenceAttribute = (group, name) => state => (
-  getPreferenceGroup(group)(state).find((preference) => (
-    preference.id === name
+export const selectPreferenceGroup = group => state => (
+  state.notificationPreferences.preferences.groups.filter(element => (
+    element.id === group
   ))
 );
 
-export const getSelectedCourse = () => state => (
+export const selectPreferenceGroupToggleValue = group => state => (
+  selectPreferenceGroup(group)(state).find((preference) => (
+    preference.id === group
+  )).enabled
+);
+
+export const selectPreferenceAttribute = (group, name) => state => (
+  selectPreferences()(state).find((preference) => (
+    preference.id === name && preference.groupId === group
+  ))
+);
+
+export const selectPreferenceDisabledAttributes = (group, name) => state => (
+  state?.notificationPreferences?.preferences?.notEditable?.[group]?.[name] || []
+);
+
+export const selectSelectedCourse = () => state => (
   state.notificationPreferences.preferences.selectedCourse
 );

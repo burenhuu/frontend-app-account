@@ -21,6 +21,7 @@ export const messages = defineMessages({
     id: 'notification.preference.title',
     defaultMessage: `{
         text, select,
+        core {Core}
         newPost {New Post}
         newComment {New Comment}
         newAssignment {New Assignment}

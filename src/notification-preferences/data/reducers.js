@@ -16,6 +16,7 @@ export const defaultState = {
     selectedCourse: null,
     preferences: [],
     groups: [],
+    notEditable: {},
   },
 };
 
@@ -54,7 +55,9 @@ const notificationPreferencesReducer = (state = defaultState, action = {}) => {
         preferences: {
           ...state.preferences,
           status: LOADING_STATUS,
-          preferences: {},
+          preferences: [],
+          groups: [],
+          notEditable: {},
         },
       };
     case Actions.FETCHED_PREFERENCES:
@@ -70,8 +73,11 @@ const notificationPreferencesReducer = (state = defaultState, action = {}) => {
       return {
         ...state,
         preferences: {
+          ...state.preferences,
           status: FAILURE_STATUS,
-          preferences: {},
+          preferences: [],
+          groups: [],
+          notEditable: {},
         },
       };
     case Actions.UPDATE_SELECTED_COURSE:
@@ -79,6 +85,7 @@ const notificationPreferencesReducer = (state = defaultState, action = {}) => {
         ...state,
         preferences: {
           ...state.preferences,
+          status: IDLE_STATUS,
           selectedCourse: courseId,
         },
       };
@@ -99,14 +106,9 @@ const notificationPreferencesReducer = (state = defaultState, action = {}) => {
         ...state,
         preferences: {
           ...state.preferences,
-          preferences: state.preferences.preferences.map((element) => (
-            element.groupId === groupName
-              ? {
-                ...element,
-                web: value,
-                email: value,
-                push: value,
-              }
+          groups: state.preferences.groups.map(element => (
+            element.id === groupName
+              ? { ...element, enabled: value }
               : element
           )),
         },

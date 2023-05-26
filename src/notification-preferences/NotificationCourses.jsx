@@ -5,20 +5,32 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Container, Icon, Spinner } from '@edx/paragon';
 import { ArrowForwardIos } from '@edx/paragon/icons';
 import { fetchCourseList } from './data/thunks';
-import { courseListStatus, getCourseList } from './data/selectors';
-import { IDLE_STATUS, LOADING_STATUS } from '../constants';
+import { selectCourseListStatus, selectCourseList } from './data/selectors';
+import {
+  FAILURE_STATUS,
+  IDLE_STATUS,
+  LOADING_STATUS,
+  SUCCESS_STATUS,
+} from '../constants';
 import { messages } from './messages';
+import { NotFoundPage } from '../account-settings';
 
 const NotificationCourses = ({ intl }) => {
   const dispatch = useDispatch();
-  const courseStatus = useSelector(courseListStatus());
-  const coursesList = useSelector(getCourseList());
+  const courseStatus = useSelector(selectCourseListStatus());
+  const coursesList = useSelector(selectCourseList());
+
   useEffect(() => {
-    if (courseStatus === IDLE_STATUS || coursesList.length === 0) {
+    if ([IDLE_STATUS, FAILURE_STATUS].includes(courseStatus)) {
       dispatch(fetchCourseList());
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseStatus]);
+
+  if (courseStatus === SUCCESS_STATUS && coursesList.length === 0) {
+    return <NotFoundPage />;
+  }
+
   if (courseStatus === LOADING_STATUS) {
     return (
       <div className="d-flex h-100">

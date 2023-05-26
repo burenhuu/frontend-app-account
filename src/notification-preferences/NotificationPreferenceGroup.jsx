@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from '@edx/frontend-platform/i18n';
@@ -6,18 +6,20 @@ import { Collapsible } from '@edx/paragon';
 import { messages } from './messages';
 import ToggleSwitch from './ToggleSwitch';
 import {
-  getPreferenceGroup,
-  getSelectedCourse,
+  selectPreferenceGroupToggleValue,
+  selectPreferencesOfGroup,
+  selectSelectedCourse,
 } from './data/selectors';
 import NotificationPreferenceRow from './NotificationPreferenceRow';
-import { updateGroupValue } from './data/actions';
+import { updateGroupToggle } from './data/actions';
+import { updateGroupPreferenceToggle } from './data/thunks';
 
 const NotificationPreferenceGroup = ({ groupId }) => {
   const dispatch = useDispatch();
   const intl = useIntl();
-  const courseId = useSelector(getSelectedCourse());
-  const preferenceGroup = useSelector(getPreferenceGroup(groupId));
-  const [groupToggle, setGroupToggle] = useState(true);
+  const courseId = useSelector(selectSelectedCourse());
+  const preferenceGroup = useSelector(selectPreferencesOfGroup(groupId));
+  const groupToggle = useSelector(selectPreferenceGroupToggleValue(groupId));
 
   const preferences = useMemo(() => (
     preferenceGroup.map(preference => (
@@ -29,8 +31,8 @@ const NotificationPreferenceGroup = ({ groupId }) => {
     ))), [groupId, preferenceGroup]);
 
   const onChangeGroupSettings = useCallback((checked) => {
-    setGroupToggle(checked);
-    dispatch(updateGroupValue(courseId, groupId, checked));
+    dispatch(updateGroupToggle(courseId, groupId, checked));
+    dispatch(updateGroupPreferenceToggle(courseId, groupId, checked));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupId]);
 
