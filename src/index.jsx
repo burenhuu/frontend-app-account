@@ -18,7 +18,7 @@ import AccountSettingsPage, { NotFoundPage } from './account-settings';
 import IdVerificationPage from './id-verification';
 import CoachingConsent from './account-settings/coaching/CoachingConsent';
 import appMessages from './i18n';
-
+import { IntlProvider } from '@edx/frontend-platform/i18n';
 import './index.scss';
 import Head from './head/Head';
 
