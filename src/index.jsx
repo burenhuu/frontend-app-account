@@ -25,22 +25,24 @@ import Head from './head/Head';
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider store={configureStore()}>
-      <Head />
-      <Switch>
-        <Route path="/coaching_consent" component={CoachingConsent} />
-        <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
-          <Header />
-          <main className="flex-grow-1">
-            <Switch>
-              <Route path="/id-verification" component={IdVerificationPage} />
-              <Route exact path="/" component={AccountSettingsPage} />
-              <Route path="/notfound" component={NotFoundPage} />
-              <Route path="*" component={NotFoundPage} />
-            </Switch>
-          </main>
-          <Footer />
-        </div>
-      </Switch>
+      <IntlProvider defaultLocale='mn' locale='mn' messages={messages.mn}>
+        <Head />
+        <Switch>
+          <Route path="/coaching_consent" component={CoachingConsent} />
+          <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+            <Header />
+            <main className="flex-grow-1">
+              <Switch>
+                <Route path="/id-verification" component={IdVerificationPage} />
+                <Route exact path="/" component={AccountSettingsPage} />
+                <Route path="/notfound" component={NotFoundPage} />
+                <Route path="*" component={NotFoundPage} />
+              </Switch>
+            </main>
+            <Footer />
+          </div>
+        </Switch>
+    </IntlProvider>
     </AppProvider>,
     document.getElementById('root'),
   );
