@@ -25,7 +25,7 @@ import Head from './head/Head';
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider store={configureStore()}>
-      <IntlProvider defaultLocale='mn' locale='mn' messages={messages.mn}>
+      <IntlProvider defaultLocale='mn' locale='mn' messages={appMessages.mn}>
         <Head />
         <Switch>
           <Route path="/coaching_consent" component={CoachingConsent} />
