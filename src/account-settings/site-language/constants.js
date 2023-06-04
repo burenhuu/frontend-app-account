@@ -5,6 +5,11 @@ const siteLanguageList = [
     released: true,
   },
   {
+    code: 'mn',
+    name: 'Mongolian',
+    released: true,
+  },
+  {
     code: 'ar',
     name: 'العربية',
     released: true,
