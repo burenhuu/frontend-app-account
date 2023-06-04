@@ -5,6 +5,7 @@ import es419Messages from './messages/es_419.json';
 import frMessages from './messages/fr.json';
 import zhcnMessages from './messages/zh_CN.json';
 import heMessages from './messages/he.json';
+import mnMessages from './messages/mn.json';
 import idMessages from './messages/id.json';
 import kokrMessages from './messages/ko_kr.json';
 import plMessages from './messages/pl.json';
@@ -27,6 +28,7 @@ const messages = {
   ru: ruMessages,
   th: thMessages,
   uk: ukMessages,
+  mn: mnMessages,
 };
 
 export default messages;
