@@ -158,7 +158,7 @@ function EmailField(props) {
               {isEditable ? (
                 <Button variant="link" onClick={handleEdit} className="ml-3">
                   <FontAwesomeIcon className="mr-1" icon={faPencilAlt} />
-                  {intl.formatMessage(messages['account.settings.editable.field.action.edit'])}
+                  {/*{intl.formatMessage(messages['account.settings.editable.field.action.edit'])}*/}
                 </Button>
               ) : null}
             </div>

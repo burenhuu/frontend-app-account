@@ -168,7 +168,8 @@ function EditableField(props) {
               <h6 aria-level="3">{label}</h6>
               {isEditable ? (
                 <Button variant="link" onClick={handleEdit} className="ml-3">
-                  <FontAwesomeIcon className="mr-1" icon={faPencilAlt} />{intl.formatMessage(messages['account.settings.editable.field.action.edit'])}
+                  <FontAwesomeIcon className="mr-1" icon={faPencilAlt} />
+                  {/*{intl.formatMessage(messages['account.settings.editable.field.action.edit'])}*/}
                 </Button>
               ) : null}
             </div>
