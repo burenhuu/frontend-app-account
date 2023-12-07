@@ -27,21 +27,23 @@ subscribe(APP_READY, () => {
     <AppProvider store={configureStore()}>
       <IntlProvider defaultLocale='mn' locale='mn' messages={appMessages.mn}>
         <Head />
-        <Switch>
-          <Route path="/coaching_consent" component={CoachingConsent} />
-          <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
-            <Header />
-            <main className="flex-grow-1">
-              <Switch>
-                <Route path="/id-verification" component={IdVerificationPage} />
-                <Route exact path="/" component={AccountSettingsPage} />
-                <Route path="/notfound" component={NotFoundPage} />
-                <Route path="*" component={NotFoundPage} />
-              </Switch>
-            </main>
-            <Footer />
-          </div>
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/coaching_consent" component={CoachingConsent} />
+            <div className="d-flex flex-column" style={{ minHeight: '100vh' }}>
+              <Header />
+              <main className="flex-grow-1">
+                <Switch>
+                  <Route path="/id-verification" component={IdVerificationPage} />
+                  <Route exact path="/" component={AccountSettingsPage} />
+                  <Route path="/notfound" component={NotFoundPage} />
+                  <Route path="*" component={NotFoundPage} />
+                </Switch>
+              </main>
+              <Footer />
+            </div>
+          </Switch>
+        </div>
     </IntlProvider>
     </AppProvider>,
     document.getElementById('root'),
